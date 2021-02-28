@@ -1,6 +1,7 @@
+const Joi = require('joi');
 const express = require('express');
-const app = express();
 
+const app = express();
 app.use(express.json());
 
 const games = [
@@ -18,10 +19,13 @@ app.get('/api/games', (req, res) => {
 });
 
 app.post('/api/games', (req, res) => {
+    
     const game = {
         id: games.length + 1,
         name: req.body.name
     };
+    games.push(game);
+    res.send(game);
 });
 
 app.get('/api/games/:id', (req, res) => {

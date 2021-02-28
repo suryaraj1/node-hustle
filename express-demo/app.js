@@ -1,6 +1,8 @@
 const express = require('express');
-
 const app = express();
+
+app.use(express.json());
+
 const games = [
     { id: 1, name: "Assassin's Creed Unity"},
     { id: 2, name: "Call of Duty"},
@@ -13,6 +15,13 @@ app.get('/', (req, res) => {
 
 app.get('/api/games', (req, res) => {
     res.send(games);
+});
+
+app.post('/api/games', (req, res) => {
+    const game = {
+        id: games.length + 1,
+        name: req.body.name
+    };
 });
 
 app.get('/api/games/:id', (req, res) => {
